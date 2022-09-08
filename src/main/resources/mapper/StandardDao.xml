@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.dao.StandardDao">
+    <!--    Integer addOne(@Param("staName") Integer staName, @Param("staFatherid") Integer staFatherid, @Param("staDetails") String staDetails,@Param("staCredit") BigDecimal staCredit, @Param("staCredit") String staRemark);-->
+    <insert id="addOne">
+        insert into standard (sta_name,
+        <trim suffix="" suffixOverrides=",">
+            <if test="staGrade!=null || staGrade!= ''">sta_grade,
+            </if>
+            <if test="staFatherid!=null || staFatherid!= ''">
+                sta_fatherid,
+            </if>
+            <if test="staCredit!=null || staCredit!= ''">
+                sta_credit,
+            </if>
+            <if test="staRemark!=null || staRemark!= ''">
+                sta_remark
+            </if>)
+            values (#{staName},
+            <if test="staGrade!=null || staGrade!= ''">
+                #{staGrade},
+            </if>
+            <if test="staFatherid!=null || staFatherid!= ''">
+                #{staFatherid},
+            </if>
+            <if test="staCredit!=null || staCredit!= ''">
+                #{staCredit},
+            </if>
+            <if test="staRemark!=null || staRemark!= ''">
+                #{staRemark}
+            </if>
+            )
+        </trim>
+    </insert>
+    <!--    String existName(String staName);-->
+    <select id="existName" resultType="com.credit.pojo.Standard">
+        select *
+        from standard
+        where sta_name = #{staName}
+    </select>
+
+    <!--    List<Type> getAllFirst();-->
+    <select id="getAllFirst" resultType="com.credit.util.Type">
+        select sta_id, sta_name, sta_grade
+        from standard
+        where sta_grade = 1
+    </select>
+    <!--    Integer updateFirst(@Param("staId")Integer staId,@Param("staName") String staName);-->
+    <update id="updateFirst">
+        update standard
+        set sta_name=#{staName}
+        where sta_id = #{staId}
+    </update>
+    <!--    Integer deleteFirst(@Param("staId") Integer staId);-->
+    <delete id="deleteFirst">
+        DELETE
+        a,
+        b,
+        c
+FROM
+	standard AS a
+	LEFT JOIN standard AS b ON a.sta_id = b.sta_fatherid
+	LEFT JOIN standard AS c ON b.sta_id = c.sta_fatherid
+WHERE
+	a.sta_id=
+        #{staId}
+    </delete>
+    <!--    Integer getGrade(@Param("staId") Integer staId);-->
+    <select id="getGrade" resultType="java.lang.Integer">
+        select sta_grade
+        from standard
+        where sta_id = #{staId}
+    </select>
+    <!--    Integer addSecondMore(List<ScopeUtil> list);-->
+    <insert id="addSecondMore">
+        insert into standard (sta_name, sta_Grade, sta_fatherid)
+        values (#{staName}, #{staGrade}, #{staFatherid})
+    </insert>
+
+    <!--    Integer addThirdMore(List<Content> list);-->
+    <insert id="addThirdMore">
+        insert into standard (sta_name,
+        sta_Grade,sta_fatherid,
+        <if test="staRemark != null || staRemark != ''">
+            sta_remark,
+        </if>
+        sta_credit )values
+        (#{staName},#{staGrade},#{staFatherid},
+        <if test="staRemark != null ||staRemark != ''">
+            #{staRemark},
+        </if>
+        #{staCredit}
+        )
+
+
+    </insert>
+</mapper>

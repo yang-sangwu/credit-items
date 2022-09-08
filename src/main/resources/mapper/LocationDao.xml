@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.credit.dao.LocationDao">
+    <!--    Location addLocation(@Param("locationAcademy") String locationAcademy, @Param("locationMajor")String locationMajor, @Param("locationClass")String locationClass, @Param("locationGrade")Integer locationGrade, @Param("locationFatherid")Integer locationFatherid);-->
+    <insert id="addLocation">
+        insert into location (location_name
+        <if test="locationFatherid !=null || locationFatherid != ''">
+            ,location_fatherid
+        </if>
+        ,location_grade) values (#{locationName}
+        <if test="locationFatherid !=null || locationFatherid != ''">
+            ,#{locationFatherid}
+        </if>
+        ,#{locationGrade})
+    </insert>
+    <!--    Integer updateLocation(@Param("locationId")Integer locationId,@Param("locationName")String locationName);-->
+    <update id="updateLocation">
+        update location
+        set location_name = #{locationName}
+        where location_id = #{locationId}
+    </update>
+    <!--    Integer deleteLocation(@Param("locationId")Integer locationId);-->
+    <delete id="deleteLocation">
+        delete
+        a,b,c
+        from location
+        as a
+        left join location as b on b.location_fatherid = a.location_id
+        left join location as c on c.location_fatherid = b.location_id
+        where
+        a.location_id =
+        #{locationId}
+    </delete>
+
+
+    <select id="getFirstLocation" resultType="com.credit.pojo.Location">
+        select *
+        from location
+        where location_grade = 1
+    </select>
+
+    <!--    List<Location> getSecondOrThirdLocation(@Param("serch") String search);-->
+    <select id="getSecondOrThirdLocation" resultType="com.credit.pojo.Location">
+        select b.*
+        from location as a
+                 left join location as b on a.location_id = b.location_fatherid
+        where a.location_name like concat('%', #{search}, '%')
+    </select>
+    <!--    Location existLocation(@Param("locationName") String locationName);-->
+    <select id="existLocation" resultType="com.credit.pojo.Location">
+        select *
+        from location
+        where location_name = #{locationName}
+    </select>
+</mapper>
