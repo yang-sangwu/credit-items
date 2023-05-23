@@ -57,14 +57,8 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             return ReturnUtil.error("项目人数范围不合理，请核查后重新输入！");
         }
 
-        //使用Date创建日期对象
         Date date = new Date();
-        /**
-         * 创建格式化时间日期类
-         *构造入参String类型就是我们想要转换成的时间形式
-         */
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        //      System.out.println("格式化后的时间------->"+format.format(date));
         Applications applications = new Applications(appName, appSex, appStuID, appMajor, appClass, appAcademic, appType, appGroup, appGroupCount, appGroupGrade, appScore, appResult, appRecognize, appContent, appUserName, appUserTime, appFacultyName, appFacultyTime, appClassName, appClassTime, appAcademicScore, appAcademicName, appAcademicTime, 0, format.format(date));
         applicationsRepository.save(applications);
         return ReturnUtil.success("添加成功", applications);

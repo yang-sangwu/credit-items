@@ -202,109 +202,109 @@
             , #{pageSize}
     </select>
     <!--    Integer countAppByTime(@Param("appName") String appName,@Param("appTime")String appTime);-->
-    <select id="countAppByTime" resultType="java.lang.Integer">
-        select count(*)
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-        where a.app_name = #{appName}
-          and a.app_time = #{appTime}
-    </select>
+        <select id="countAppByTime" resultType="java.lang.Integer">
+            select count(*)
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+            where a.app_name = #{appName}
+              and a.app_time = #{appTime}
+        </select>
 
-    <!--    List<RecordUtil> findUserByAppPass(@Param("appPass") Integer appPass, @Param("pages") Integer pages, @Param("num") Integer num);-->
-    <select id="findUserByAppPass" resultType="com.credit.util.RecordUtil">
-        select a.app_name,
-               a.app_stuID,
-               a.app_class,
-               a.app_type,
-               a.app_group,
-               a.app_group_count,
-               a.app_group_grade,
-               a.app_score,
-               a.app_time,
-               a.app_pass,
-               c.record_id,
-               c.record_appid
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-        where a.app_pass = #{appPass} limit #{pages}
-            , #{num}
-    </select>
+        <!--    List<RecordUtil> findUserByAppPass(@Param("appPass") Integer appPass, @Param("pages") Integer pages, @Param("num") Integer num);-->
+        <select id="findUserByAppPass" resultType="com.credit.util.RecordUtil">
+            select a.app_name,
+                   a.app_stuID,
+                   a.app_class,
+                   a.app_type,
+                   a.app_group,
+                   a.app_group_count,
+                   a.app_group_grade,
+                   a.app_score,
+                   a.app_time,
+                   a.app_pass,
+                   c.record_id,
+                   c.record_appid
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+            where a.app_pass = #{appPass} limit #{pages}
+                , #{num}
+        </select>
 
-    <!--    Integer queryAppAppPassCounts(@Param("appPass") Integer appPass);-->
-    <select id="queryAppAppPassCounts" resultType="java.lang.Integer">
-        select count(*)
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-        where a.app_pass = #{appPass}
-    </select>
-    <!--    List<RecordUtil> queryAppByTime(@Param("appTime") String appTime, @Param("appPass") Integer appPass, @Param("pages") Integer pages, @Param("num") Integer num);-->
-    <select id="queryAppByTime" resultType="com.credit.util.RecordUtil">
-        select a.app_name,
-               a.app_stuID,
-               a.app_class,
-               a.app_type,
-               a.app_group,
-               a.app_group_count,
-               a.app_group_grade,
-               a.app_score,
-               a.app_time,
-               a.app_pass,
-               c.record_id,
-               c.record_appid
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-        where a.app_time = #{appTime}
-          and a.app_pass = #{appPass} limit #{pages}
-            , #{num}
-    </select>
+        <!--    Integer queryAppAppPassCounts(@Param("appPass") Integer appPass);-->
+        <select id="queryAppAppPassCounts" resultType="java.lang.Integer">
+            select count(*)
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+            where a.app_pass = #{appPass}
+        </select>
+        <!--    List<RecordUtil> queryAppByTime(@Param("appTime") String appTime, @Param("appPass") Integer appPass, @Param("pages") Integer pages, @Param("num") Integer num);-->
+        <select id="queryAppByTime" resultType="com.credit.util.RecordUtil">
+            select a.app_name,
+                   a.app_stuID,
+                   a.app_class,
+                   a.app_type,
+                   a.app_group,
+                   a.app_group_count,
+                   a.app_group_grade,
+                   a.app_score,
+                   a.app_time,
+                   a.app_pass,
+                   c.record_id,
+                   c.record_appid
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+            where a.app_time = #{appTime}
+              and a.app_pass = #{appPass} limit #{pages}
+                , #{num}
+        </select>
 
-    <!--    Integer queryAppByTimeCounts(@Param("appTime") String appTime, @Param("appPass") Integer appPass);-->
-    <select id="queryAppByTimeCounts" resultType="java.lang.Integer">
-        select count(*)
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
+        <!--    Integer queryAppByTimeCounts(@Param("appTime") String appTime, @Param("appPass") Integer appPass);-->
+        <select id="queryAppByTimeCounts" resultType="java.lang.Integer">
+            select count(*)
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
 
-        where a.app_time = #{appTime}
-          and a.app_pass = #{appPass}
-    </select>
+            where a.app_time = #{appTime}
+              and a.app_pass = #{appPass}
+        </select>
 
-    <!--    List<RecordUtil> queryAllAppTime(@Param("pages") Integer pages, @Param("num") Integer num);-->
-    <select id="queryAllAppTime" resultType="com.credit.util.RecordUtil">
-        select a.app_name,
-               a.app_stuID,
-               a.app_class,
-               a.app_type,
-               a.app_group,
-               a.app_group_count,
-               a.app_group_grade,
-               a.app_score,
-               a.app_time,
-               a.app_pass,
-               c.record_id,
-               c.record_appid
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-        order by a.app_time desc limit #{pages}
-               , #{num}
-    </select>
-    <!--    Integer queryAllAppTimeCounts();-->
-    <select id="queryAllAppTimeCounts" resultType="java.lang.Integer">
-        select count(*)
-        from applications as a
-                 left join user as b on a.app_stuID = b.user_code
-                 right join record as c on c.record_appid = a.app_id
-    </select>
+        <!--    List<RecordUtil> queryAllAppTime(@Param("pages") Integer pages, @Param("num") Integer num);-->
+        <select id="queryAllAppTime" resultType="com.credit.util.RecordUtil">
+            select a.app_name,
+                   a.app_stuID,
+                   a.app_class,
+                   a.app_type,
+                   a.app_group,
+                   a.app_group_count,
+                   a.app_group_grade,
+                   a.app_score,
+                   a.app_time,
+                   a.app_pass,
+                   c.record_id,
+                   c.record_appid
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+            order by a.app_time desc limit #{pages}
+                   , #{num}
+        </select>
+        <!--    Integer queryAllAppTimeCounts();-->
+        <select id="queryAllAppTimeCounts" resultType="java.lang.Integer">
+            select count(*)
+            from applications as a
+                     left join user as b on a.app_stuID = b.user_code
+                     right join record as c on c.record_appid = a.app_id
+        </select>
 
-    <!--    Integer deleteByRecordId(Integer recordId);-->
-    <delete id="deleteByRecordId">
-        delete
-        from record
-        where record_id = #{recordId}
-    </delete>
+        <!--    Integer deleteByRecordId(Integer recordId);-->
+        <delete id="deleteByRecordId">
+            delete
+            from record
+            where record_id = #{recordId}
+        </delete>
 </mapper>

@@ -25,7 +25,6 @@ import java.util.List;
 @Api(tags = "申请表")
 @RestController
 @Slf4j
-
 @RequestMapping("/applications")
 public class ApplicationsController {
     @Resource

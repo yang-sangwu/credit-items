@@ -40,7 +40,6 @@ public class AuthentizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String token = request.getHeader("token");
-
         if (token != null) {
             String usercode = jwtTokenUtil.getUsernameFromToken(token);
             if (usercode != null && SecurityContextHolder.getContext().getAuthentication() == null){

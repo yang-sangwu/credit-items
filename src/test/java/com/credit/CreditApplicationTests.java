@@ -21,11 +21,9 @@ class CreditApplicationTests {
 //        spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 //        spring.datasource.username=root
 //        spring.datasource.password=123456
-        String url = stringEncryptor.encrypt("jdbc:mysql://110.40.212.128/credit?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC");
         String username = stringEncryptor.encrypt("root");
-        String password = stringEncryptor.encrypt("yangsaiya@123");
+        String password = stringEncryptor.encrypt("123456");
 
-        System.out.println("url:"+url);
         System.out.println("username:"+username);
         System.out.println("password:"+password);
     }
